@@ -106,7 +106,7 @@
 
     - name: copy apache2 conf-available
       copy:
-        src: ./files/apache2/etc/apache2/conf-available/{{ item }}
+        src: ./files/etc/apache2/conf-available/{{ item }}
         dest: /etc/apache2/conf-available/
       with_items:
         - security.conf
@@ -124,7 +124,7 @@
 
     - name: copy apache2 sites-available
       copy:
-        src: ./files/apache2/etc/apache2/sites-available/{{ item }}
+        src: ./files/etc/apache2/sites-available/{{ item }}
         dest: /etc/apache2/sites-available/
       with_items:
         - 000-default.conf
