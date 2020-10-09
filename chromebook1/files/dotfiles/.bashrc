@@ -1,3 +1,3 @@
-if [ -f ~/.bash_hstn ]; then
-	. ~/.bash_hstn
+if [ -f ~/.bash_sho ]; then
+	. ~/.bash_sho
 fi
