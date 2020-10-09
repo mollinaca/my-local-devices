@@ -2,6 +2,10 @@
 - hosts: chromebook1
   become: yes
   tasks:
+    - name: set hostname
+      hostname:
+        name: chromebook1
+
     - name: set timezone to Asia/Tokyo
       timezone:
         name: Asia/Tokyo
@@ -23,10 +27,10 @@
       with_file:
         - ./files/dotfiles/.bashrc
     
-    - name: add .bash_hstn
+    - name: add .bash_sho
       copy:
-        src: ./files/dotfiles/.bash_hstn
-        dest: /root/.bash_hstn
+        src: ./files/dotfiles/.bash_sho
+        dest: /root/.bash_sho
 
     - name: add .vimrc
       copy:
@@ -173,4 +177,15 @@
       git:
         repo: 'https://github.com/mollinaca/hstn-family-scripts'
         dest: /root/tools/hstn-family-scripts
-        clone: 'no'
+        clone: 'yes'
+
+    - name: add setting.ini from local
+      copy:
+        src: ./files/secrets/setting.ini
+        dest: /root/tools/hstn-family-scripts/setting.ini
+
+    - name: add cron file
+      copy:
+        src: ./files/crontabs/hstn-family-tools
+        dest: /etc/cron.d/hstn-family-tools
+
