@@ -186,6 +186,6 @@
 
     - name: add cron file
       copy:
-        src: ./files/crontabs/hstn-family-tools
+        src: ./files/etc/cron.d/hstn-family-tools
         dest: /etc/cron.d/hstn-family-tools
 
