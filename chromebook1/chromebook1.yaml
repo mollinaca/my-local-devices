@@ -43,6 +43,13 @@
         dest: /home/sho/.vimrc
         owner: 'sho'
         group: 'sho'
+    
+    - name: present sho/workspace/
+      file:
+        path: /home/sho/workspace/
+        state: directory
+        owner: 'sho'
+        group: 'sho'
 
     - name: modify rsyslog config
       copy:
