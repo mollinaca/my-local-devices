@@ -5,3 +5,15 @@
     - name: set hostname
       hostname:
         name: raspberry1
+
+    - name: set timezone to Asia/Tokyo
+      timezone:
+        name: Asia/Tokyo
+
+    - name: apt update
+      apt: 
+        update_cache: 'yes'
+
+    - name: apt upgrade
+      apt:
+        upgrade: 'yes'
