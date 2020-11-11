@@ -1,0 +1,7 @@
+---
+- hosts: raspberry1
+  become: yes
+  tasks:
+    - name: set hostname
+      hostname:
+        name: raspberry1
