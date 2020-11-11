@@ -25,7 +25,7 @@ for my local raspberrypi: ubuntu 20.10 Desktop
 # apply playbook
 
 ```
-# ansilbe-playbook -i hosts raspberry1.yaml
+# ansilbe-playbook -i hosts raspberry1.yaml --extra-vars="@private.yml" --ask-vault-pass
 ```
 
 
