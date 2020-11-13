@@ -1,0 +1,23 @@
+# umask
+umask 0022
+
+# C-s/C-q
+if [[ -t 0 ]]; then
+  stty stop undef
+  stty start undef
+fi
+
+# bash prompt
+# export PS1="\n:\w\[\e[0m\]\\n # " 
+
+# delete bash history
+unset HISTFILE
+export LESSHISTFILE=-
+
+# editor
+export EDITOR=vim.basic
+
+# some more ls aliases
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
