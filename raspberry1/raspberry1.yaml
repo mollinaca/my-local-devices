@@ -1,6 +1,9 @@
 ---
 - hosts: raspberry1
   become: yes
+  vars_files:
+    - private.yaml
+
   tasks:
     - name: set hostname
       hostname:
@@ -17,3 +20,42 @@
     - name: apt upgrade
       apt:
         upgrade: 'yes'
+
+    - name: blockinfile to .bashrc
+      blockinfile:
+        path: /root/.bashrc
+        create: 'yes'
+        marker: "# {mark} ANSIBLE Fish-shell basic setup."
+        block: "{{item}}"
+      with_file:
+        - ./files/dotfiles/.bashrc
+    
+    - name: add .bash_sho
+      copy:
+        src: ./files/dotfiles/.bash_sho
+        dest: /root/.bash_sho
+
+    - name: add .bash_sho to sho
+      copy:
+        src: ./files/dotfiles/.bash_sho
+        dest: /home/sho/.bash_sho
+
+    - name: add .vimrc
+      copy:
+        src: ./files/dotfiles/.vimrc
+        dest: /root/.vimrc
+    
+    - name: add .vimrc to sho
+      copy:
+        src: ./files/dotfiles/.vimrc
+        dest: /home/sho/.vimrc
+        owner: 'sho'
+        group: 'sho'
+
+    - name: create user raspberry
+      user:
+        name: 'raspberry'
+        groups: 'raspberry'
+        password: "{{ user_raspberry_pass }}"
+        uid: 1001
+        shell: /bin/bash
