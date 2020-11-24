@@ -26,7 +26,19 @@ host  = 192.168.100.1
 
 menu  = raspberry1
 title = raspberry1
-host  = 192.168.100.201
+host  = 192.168.100.202
+
+++ Local_WPA150_1F
+
+menu  = WPA150_1F
+title = WPA150_1F
+host  = 192.168.100.246
+
+++ Local_WPA150_2F
+
+menu  = WPA150_2F
+title = WPA150_2F
+host  = 192.168.100.247
 
 ++ Google_1_ICMP
 
