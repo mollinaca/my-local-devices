@@ -1,8 +1,16 @@
 ### garbage_notify
 00 20 * * *  root    /usr/bin/python3  /root/tools/hstn-family-scripts/garbage_notify.py >/dev/null 2>&1
+00 17 * * *  root    /usr/bin/python3  /root/tools/hstn-family-scripts/garbage_notify.py >/dev/null 2>&1
 
 ### yurichan_okodukai
 00 13 * * *  root    /usr/bin/python3  /root/tools/hstn-family-scripts/yurichan_okodukai_remainder.py >/dev/null 2>&1
 
+### furikomi_reminder
+00 13 * * *  root    /usr/bin/python3  /root/tools/hstn-family-scripts/furikomi_remainder.py >/dev/null 2>&1
+
 ### chromebook1 server-stats
 01 * * * *   root    /usr/bin/python3  /root/tools/hstn-family-scripts/server-stats.py >/dev/null 2>&1
+58 * * * *   root    /usr/bin/python3  /root/tools/hstn-family-scripts/server-stats_speedtest.py >/dev/null 2>&1
+
+### flayers
+00 10 * * *  root    /usr/bin/python3  /root/tools/hstn-family-scripts/flayers.py >/dev/null 2>&1

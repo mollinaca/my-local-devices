@@ -78,6 +78,17 @@
           - pkg-config
           - uuid-dev
 
+    - name: apt-get install pip
+      apt:
+        name:
+          - python3-pip
+
+    - name: pip install
+      pip:
+        name:
+          - GitPython
+          - bs4
+
     - name: copy smokeping/config.d/Probes
       copy:
         src: files/smokeping/config.d/Probes
