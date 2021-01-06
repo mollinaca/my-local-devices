@@ -164,6 +164,11 @@
         src: ./files/netdata/etc/netdata/netdata.conf
         dest: /etc/netdata/netdata.conf
 
+    - name: copy netdata/usr/lib/netdata/conf.d/health_alarm_notify.conf
+      copy:
+        src: ./files/netdata/usr/lib/netdata/conf.d/health_alarm_notify.conf
+        dest: /usr/lib/netdata/conf.d/health_alarm_notify.conf
+
     - name: create directory netdata.service.d
       file:
         path: /etc/systemd/system/netdata.service.d
