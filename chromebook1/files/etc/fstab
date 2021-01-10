@@ -1,0 +1,4 @@
+/dev/disk/by-id/dm-uuid-LVM-daAkt1RhJXt9hLmCUNnRh5cAhjoum3Vi414vS4rLmYStqBo8d2pWapoWMpNuvd9d    /               ext4    defaults 0 0
+/dev/disk/by-uuid/f7846975-b8f9-4a25-8b02-4bcafd78bf0e                                          /boot           ext4    defaults 0 0
+/swap.img                                                                                       none            swap    sw       0 0
+UUID=5c469829-c881-4616-91ac-8ffe265288b4                                                       /mnt/extDisk    ext4    defaults 0 0
