@@ -1,0 +1,6 @@
+# このサーバで実行するのに使う pip モジュールのインストール
+- name: pip install
+  pip:
+    name:
+      - GitPython
+      - bs4

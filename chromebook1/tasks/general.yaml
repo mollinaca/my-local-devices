@@ -1,0 +1,7 @@
+- name: set hostname
+  hostname:
+    name: chromebook1
+
+- name: set timezone to Asia/Tokyo
+  timezone:
+    name: Asia/Tokyo

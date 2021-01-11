@@ -1,0 +1,37 @@
+- name: blockinfile to .bashrc
+  blockinfile:
+    path: /root/.bashrc
+    create: 'yes'
+    marker: "# {mark} ANSIBLE setup."
+    block: "{{item}}"
+  with_file:
+    - ../files/dotfiles/.bashrc
+
+- name: add .vimrc
+  copy:
+    src: ../files/dotfiles/.vimrc
+    dest: /root/.vimrc
+
+- name: present .ssh dir
+  file:
+    path: /root/.ssh
+    state: directory
+    mode: 0700
+
+- name: copy authorized_keys
+  copy:
+    src: ../files/secrets/.ssh/authorized_keys
+    dest: /root/.ssh/authorized_keys
+    mode: 0400
+
+- name: copy ssh config
+  copy:
+    src: ../files/secrets/.ssh/config
+    dest: /root/.ssh/config
+    mode: 0644
+
+- name: copy ssh key for bot user
+  copy:
+    src: ../files/secrets/.ssh/bot_SSHKEY
+    dest: /root/.ssh/bot_SSHKEY
+    mode: 0400

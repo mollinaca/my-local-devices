@@ -1,0 +1,4 @@
+- name: modify rsyslog config
+  copy:
+    src: ../files/etc/rsyslog/50-default.conf
+    dest: /etc/rsyslog.d/50-default.conf

@@ -1,0 +1,29 @@
+- name: copy netdata/etc/netdata/netdata.conf
+  copy:
+    src: ../files/netdata/etc/netdata/netdata.conf
+    dest: /etc/netdata/netdata.conf
+
+- name: copy netdata/usr/lib/netdata/conf.d/health_alarm_notify.conf
+  copy:
+    src: ../files/netdata/usr/lib/netdata/conf.d/health_alarm_notify.conf
+    dest: /usr/lib/netdata/conf.d/health_alarm_notify.conf
+
+- name: create directory netdata.service.d
+  file:
+    path: /etc/systemd/system/netdata.service.d
+    state: directory
+
+- name: copy etc/systemd/system/netdata.service.d/override.conf
+  copy:
+    src: ../files/etc/systemd/system/netdata.service.d/override.conf
+    dest: /etc/systemd/system/netdata.service.d/override.conf
+    # https://github.com/netdata/netdata/issues/8820 
+
+- name: daemon-reload for netdata
+  shell: systemctl daemon-reload
+
+- name: restart netdata
+  systemd:
+    name: netdata.service
+    state: restarted
+    enabled: 'yes'

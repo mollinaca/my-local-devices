@@ -1,0 +1,17 @@
+- name: copy smokeping/config.d/Probes
+  copy:
+    src: ../files/smokeping/config.d/Probes
+    dest: /etc/smokeping/config.d/Probes
+    backup: 'no'
+
+- name: copy smokeping/config.d/Targets
+  copy:
+    src: ../files/smokeping/config.d/Targets
+    dest: /etc/smokeping/config.d/Targets
+    backup: 'no'
+
+- name: restart smokeping
+  systemd:
+    name: smokeping.service
+    state: restarted
+    enabled: 'yes'

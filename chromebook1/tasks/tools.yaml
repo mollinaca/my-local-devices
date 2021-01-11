@@ -1,0 +1,24 @@
+    - name: create tools dir
+      file:
+        path: /root/tools
+        state: directory
+        owner: root
+        group: root
+      
+    - name: git clone hstn-family-script
+      git:
+        repo: 'git@github.com:mollinaca/hstn-family-scripts'
+        dest: /root/tools/hstn-family-scripts
+        key_file: /root/.ssh/bot_SSHKEY
+        clone: 'yes'
+
+    - name: add setting.ini from local
+      copy:
+        src: ../files/secrets/setting.ini
+        dest: /root/tools/hstn-family-scripts/setting.ini
+
+    - name: add cron file
+      copy:
+        src: ../files/etc/cron.d/hstn-family-tools
+        dest: /etc/cron.d/hstn-family-tools
+

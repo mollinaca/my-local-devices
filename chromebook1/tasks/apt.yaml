@@ -1,0 +1,36 @@
+- name: apt update
+  apt: 
+    update_cache: 'yes'
+
+- name: apt upgrade
+  apt:
+    upgrade: 'yes'
+
+- name: apt-get install modules 1
+  apt:
+    name:
+      - zlib1g-dev
+      - gcc
+      - make
+      - autoconf
+      - autogen
+      - automake
+      - pkg-config
+      - uuid-dev
+
+- name: apt-get install modules 2
+  apt:
+    name:
+      - git
+      - vim
+      - fping
+      - mlocate
+      - python3-pip
+
+- name: apt-get install modules 3
+  apt:
+    name:
+      - apache2
+      - lm-sensors
+      - smokeping
+      - netdata

@@ -1,0 +1,30 @@
+# ansible 実行前に sho ユーザは作成済み #
+- name: blockinfile to .bashrc
+  blockinfile:
+    path: /home/sho/.bashrc
+    create: 'yes'
+    marker: "# {mark} ANSIBLE setup."
+    block: "{{item}}"
+  with_file:
+    - ../files/dotfiles/.bashrc
+
+- name: add .bash_sho
+  copy:
+    src: ../files/dotfiles/.bash_sho
+    dest: /home/sho/.bash_sho
+    owner: 'sho'
+    group: 'sho'
+
+- name: add .vimrc to sho
+  copy:
+    src: ../files/dotfiles/.vimrc
+    dest: /home/sho/.vimrc
+    owner: 'sho'
+    group: 'sho'
+    
+- name: present sho/workspace/
+  file:
+    path: /home/sho/workspace/
+    state: directory
+    owner: 'sho'
+    group: 'sho'

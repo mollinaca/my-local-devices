@@ -1,0 +1,41 @@
+- name: delete unuse apache2 conf
+  shell: rm -f /etc/apache2/conf-available/*
+  args:
+    warn: false
+
+- name: disable unuse apache2 conf symlinks
+  shell: rm -f /etc/apache2/conf-enabled/*
+  args:
+    warn: false
+
+- name: copy apache2 conf-available
+  copy:
+    src: ../files/etc/apache2/conf-available/{{ item }}
+    dest: /etc/apache2/conf-available/
+  with_items:
+    - security.conf
+    - server-cgi-bin.conf
+    - smokeping.conf
+
+- name: enable apache2 conf-available
+  shell: ln -s /etc/apache2/conf-available/{{ item }} /etc/apache2/conf-enabled/{{ item }}
+  args:
+    warn: false
+  with_items:
+    - security.conf
+    - server-cgi-bin.conf
+    - smokeping.conf
+
+- name: copy apache2 sites-available
+  copy:
+    src: ../files/etc/apache2/sites-available/{{ item }}
+    dest: /etc/apache2/sites-available/
+  with_items:
+    - 000-default.conf
+    - default-ssl.conf
+
+- name: restart apache2
+  systemd:
+    name: apache2.service
+    state: restarted
+    enabled: 'yes'
