@@ -35,3 +35,15 @@
     src: ../files/secrets/.ssh/bot_SSHKEY
     dest: /root/.ssh/bot_SSHKEY
     mode: 0400
+
+- name: create symlink /root/extDisk
+  file:
+    path: /root/extDisk
+    state: link
+    src: /mnt/extDisk
+
+- name: create symlink /root/workspace
+  file:
+    path: /root/workspace
+    state: link
+    src: /mnt/extDisk/root/workspace

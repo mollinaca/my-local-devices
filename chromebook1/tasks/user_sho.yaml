@@ -1,4 +1,5 @@
 # ansible 実行前に sho ユーザは作成済み #
+# sshログイン用の authrized_keys も配置済み#
 - name: blockinfile to .bashrc
   blockinfile:
     path: /home/sho/.bashrc
@@ -21,10 +22,20 @@
     dest: /home/sho/.vimrc
     owner: 'sho'
     group: 'sho'
-    
-- name: present sho/workspace/
-  file:
-    path: /home/sho/workspace/
-    state: directory
+
+- name: copy ssh key for bot user
+  copy:
+    src: ../files/secrets/.ssh/bot_SSHKEY
+    dest: /root/.ssh/bot_SSHKEY
+    mode: 0400
     owner: 'sho'
     group: 'sho'
+
+- name: create sho/workspace
+  file:
+    path: /home/sho/workspace
+    state: link
+    src: /mnt/extDisk/sho/workspace
+    owner: 'sho'
+    group: 'sho'
+ 

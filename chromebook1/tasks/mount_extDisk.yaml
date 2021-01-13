@@ -13,3 +13,21 @@
   shell: 'mount -a'
   args:
     warn: false
+
+- name: mkdir /mnt/extDisk/src
+  file:
+    path: /mnt/extDisk/src
+    state: directory
+
+- name: mkdir /mnt/extDisk/root/workspace
+  file:
+    path: /mnt/extDisk/root/workspace
+    state: directory
+
+- name: mkdir /mnt/extDisk/sho/workspace
+  file:
+    path: /mnt/extDisk/sho/workspace
+    state: directory
+    owner: 'sho'
+    group: 'sho'
+    recurse: true

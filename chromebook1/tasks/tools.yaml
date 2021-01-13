@@ -1,24 +1,33 @@
-    - name: create tools dir
-      file:
-        path: /root/tools
-        state: directory
-        owner: root
-        group: root
-      
-    - name: git clone hstn-family-script
-      git:
-        repo: 'git@github.com:mollinaca/hstn-family-scripts'
-        dest: /root/tools/hstn-family-scripts
-        key_file: /root/.ssh/bot_SSHKEY
-        clone: 'yes'
+- name: create tools dir
+  file:
+    path: /sho/workspace/tools
+    state: directory
+    owner: 'sho'
+    group: 'sho'
 
-    - name: add setting.ini from local
-      copy:
-        src: ../files/secrets/setting.ini
-        dest: /root/tools/hstn-family-scripts/setting.ini
+- name: git clone hstn-family-script
+  git:
+    repo: 'git@github.com:mollinaca/hstn-family-scripts'
+    dest: /sho/workspace/tools/hstn-family-scripts
+    key_file: /sho/.ssh/bot_SSHKEY
+    clone: 'yes'
 
-    - name: add cron file
-      copy:
-        src: ../files/etc/cron.d/hstn-family-tools
-        dest: /etc/cron.d/hstn-family-tools
+- name: chown hstn-family-script directory
+  file:
+    path: /sho/workspace/tools/hstn-family-scripts
+    state: directory
+    owner: 'sho'
+    group: 'sho'
+    recurse: true
 
+- name: add setting.ini from local
+  copy:
+    src: ../files/secrets/setting.ini
+    dest: /sho/workspace/tools/hstn-family-scripts/setting.ini
+    owner: 'sho'
+    group: 'sho'
+
+- name: add cron file
+  copy:
+    src: ../files/etc/cron.d/hstn-family-tools
+    dest: /etc/cron.d/hstn-family-tools
