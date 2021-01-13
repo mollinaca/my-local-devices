@@ -1,0 +1,15 @@
+# disk is already connected
+- name: copy fstab
+  copy:
+    src: ../files/etc/fstab
+    dest: /etc/fstab
+
+- name: mkdir /mnt/extDisk
+  file:
+    path: /mnt/extDisk
+    state: directory
+
+- name: mount by shell
+  shell: 'mount -a'
+  args:
+    warn: false
