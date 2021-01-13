@@ -34,3 +34,12 @@
       - lm-sensors
       - smokeping
       - netdata
+
+- name: apt-get install modules4
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common

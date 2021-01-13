@@ -1,0 +1,46 @@
+- name: create docker directory
+  file:
+    state: directory
+    path: /mnt/extDisk/docker
+
+- name: import GPG key
+  shell: 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'
+
+- name: add stable repo to apt
+  shell: 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
+
+- name: apt update
+  apt: 
+    update_cache: 'yes'
+
+- name: apt get install docker-ce
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+- name: corpy daemon.json
+  copy:
+    src: ../files/etc/docker/daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: restart docker
+  systemd:
+    name: docker.service
+    daemon_reload: yes
+    enabled: yes
+
+- name: install docker compose
+  shell: 'curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /mnt/extDisk/src/docker-compose'
+
+- name: chmod docker compose
+  file:
+    path: /mnt/extDisk/src/docker-compose
+    mode: 755
+
+- name: install docker compose create symlink
+  file:
+    state: link
+    path: /usr/local/bin/docker-compose
+    src: /mnt/extDisk/src/docker-compose
