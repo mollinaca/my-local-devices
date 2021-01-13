@@ -26,16 +26,20 @@
 - name: copy ssh key for bot user
   copy:
     src: ../files/secrets/.ssh/bot_SSHKEY
-    dest: /root/.ssh/bot_SSHKEY
+    dest: /home/sho/.ssh/bot_SSHKEY
     mode: 0400
     owner: 'sho'
     group: 'sho'
+
+- name: copy ssh config
+  copy:
+    src: ../files/secrets/sho/.ssh/config
+    dest: /home/sho/.ssh/config
+    mode: 0644
 
 - name: create sho/workspace
   file:
     path: /home/sho/workspace
     state: link
     src: /mnt/extDisk/sho/workspace
-    owner: 'sho'
-    group: 'sho'
  

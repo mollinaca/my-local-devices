@@ -1,0 +1,20 @@
+- name: git clone hstn-family-script
+  become: true
+  become_user: 'sho'
+  git:
+    repo: 'git@github.com:mollinaca/hstn-family-scripts'
+    dest: /home/sho/workspace/hstn-family-scripts
+    key_file: /home/sho/.ssh/bot_SSHKEY
+    clone: 'yes'
+
+- name: add setting.ini from local
+  become: true
+  become_user: 'sho'
+  copy:
+    src: ../files/secrets/setting.ini
+    dest: /home/sho/workspace/hstn-family-scripts/setting.ini
+
+- name: add cron file
+  copy:
+    src: ../files/etc/cron.d/hstn-family-tools
+    dest: /etc/cron.d/hstn-family-tools
