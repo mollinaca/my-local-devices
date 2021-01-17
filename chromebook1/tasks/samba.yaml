@@ -1,0 +1,31 @@
+- name: apt update
+  apt: 
+    update_cache: 'yes'
+
+- name: apt get install samba
+  apt:
+    name:
+      - samba
+
+- name: mkdir /mnt/extDisk/chbk1-share
+  file:
+    path: /mnt/extDisk/chbk1-share
+    state: directory
+    mode: 0777
+
+- name: mkdir /mnt/extDisk/log/samba
+  file:
+    path: /mnt/extDisk/log/samba
+    state: directory
+    mode: 0644
+
+- name: copy /etc/samba/smb.conf
+  copy:
+    src: ../files/etc/samba/smb.conf
+    dest: /etc/samba/smb.conf
+
+- name: restart smbd
+  systemd:
+    name: smbd.service
+    state: restarted
+    enabled: 'yes'
