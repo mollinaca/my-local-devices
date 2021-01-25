@@ -13,4 +13,4 @@
 58 * * * *   sho    /usr/bin/python3  /home/sho/workspace/hstn-family-scripts/server-stats_speedtest.py >/dev/null 2>&1
 
 ### flayers
-#00 10,19 * * *  sho    /usr/bin/python3  /home/sho/workspace/hstn-family-scripts/flayers.py >/dev/null 2>&1
+00 10,19 * * *  sho    /usr/bin/python3  /home/sho/workspace/hstn-family-scripts/flayers.py >/dev/null 2>&1
