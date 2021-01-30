@@ -5,13 +5,13 @@
     - include_tasks: tasks/apt.yaml
     - include_tasks: tasks/general.yaml
     - include_tasks: tasks/general_conf.yaml
-    - include_tasks: tasks/mount_extDisk.yaml
-    - include_tasks: tasks/samba.yaml
-    - include_tasks: tasks/user_sho.yaml
-    - include_tasks: tasks/user_root.yaml
+#    - include_tasks: tasks/mount_extDisk.yaml
+#    - include_tasks: tasks/samba.yaml
+#    - include_tasks: tasks/user_sho.yaml
+#    - include_tasks: tasks/user_root.yaml
     - include_tasks: tasks/pip-install.yaml
     - include_tasks: tasks/docker.yaml
-    - include_tasks: tasks/apache2.yaml
+#    - include_tasks: tasks/apache2.yaml
     - include_tasks: tasks/smokeping.yaml
-    - include_tasks: tasks/netdata.yaml
-    - include_tasks: tasks/hstn-family-scripts.yaml
+#    - include_tasks: tasks/netdata.yaml
+#    - include_tasks: tasks/hstn-family-scripts.yaml
