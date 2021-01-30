@@ -31,3 +31,8 @@
     owner: 'sho'
     group: 'sho'
     recurse: true
+
+- name: mdkir /mnt/extDisk/log
+  file:
+    path: /mnt/extDisk/log
+    state: directory

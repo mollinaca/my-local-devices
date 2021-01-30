@@ -31,16 +31,22 @@
     daemon_reload: yes
     enabled: yes
 
-- name: install docker compose
-  shell: 'curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /mnt/extDisk/src/docker-compose'
+# docker-compose already install by pip3
+#- name: install docker compose
+#  shell: 'curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /mnt/extDisk/src/docker-compose'
+#
+#- name: chmod docker compose
+#  file:
+#    path: /mnt/extDisk/src/docker-compose
+#    mode: 0755
+#
+#- name: install docker compose create symlink
+#  file:
+#    src: /mnt/extDisk/src/docker-compose
+#    dest: /usr/local/bin/docker-compose
+#    state: link
 
-- name: chmod docker compose
+- name: create docker workspace dir
   file:
-    path: /mnt/extDisk/src/docker-compose
-    mode: 755
-
-- name: install docker compose create symlink
-  file:
-    state: link
-    path: /usr/local/bin/docker-compose
-    src: /mnt/extDisk/src/docker-compose
+    state: directory
+    path: /mnt/extDisk/root/workspace/docker

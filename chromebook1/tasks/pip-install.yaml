@@ -3,5 +3,6 @@
   pip:
     name:
       - docker
+      - docker-compose
       - GitPython
       - bs4

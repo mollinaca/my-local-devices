@@ -25,6 +25,7 @@
       - vim
       - fping
       - mlocate
+      - net-tools
       - python3-pip
 
 - name: apt-get install modules 3

@@ -24,6 +24,11 @@
     src: ../files/etc/samba/smb.conf
     dest: /etc/samba/smb.conf
 
+- name: copy /etc/samba/usermap.txt
+  copy:
+    src: ../files/etc/samba/usermap.txt
+    dest: /etc/samba/usermap.txt
+
 - name: restart smbd
   systemd:
     name: smbd.service

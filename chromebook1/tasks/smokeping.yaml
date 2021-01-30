@@ -1,12 +1,18 @@
+- name: copy smokeping/config.d/Presentation
+  copy:
+    src: ../files/etc/smokeping/config.d/Presentation
+    dest: /etc/smokeping/config.d/Presentation
+    backup: 'no'
+
 - name: copy smokeping/config.d/Probes
   copy:
-    src: ../files/smokeping/config.d/Probes
+    src: ../files/etc/smokeping/config.d/Probes
     dest: /etc/smokeping/config.d/Probes
     backup: 'no'
 
 - name: copy smokeping/config.d/Targets
   copy:
-    src: ../files/smokeping/config.d/Targets
+    src: ../files/etc/smokeping/config.d/Targets
     dest: /etc/smokeping/config.d/Targets
     backup: 'no'
 
@@ -15,3 +21,17 @@
     name: smokeping.service
     state: restarted
     enabled: 'yes'
+
+## docker container
+- name: copy smokeping/docker/docker-compose.yml
+  copy:
+    src: ../files/docker/smokeping/docker-compose.yml
+    dest: /root/workspace/docker/smokeping/docker-compose.yml
+    backup: 'no'
+
+- name: start container
+  docker_compose:
+    project_src: /root/workspace/docker/smokeping
+    files:
+      - docker-compose.yml
+    state: present

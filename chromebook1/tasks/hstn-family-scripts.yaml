@@ -11,7 +11,7 @@
   become: true
   become_user: 'sho'
   copy:
-    src: ../files/secrets/setting.ini
+    src: ../files/secrets/hstn-family-scripts/setting.ini
     dest: /home/sho/workspace/hstn-family-scripts/setting.ini
 
 - name: add cron file
