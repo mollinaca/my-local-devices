@@ -1,0 +1,4 @@
+{
+    "data-root": "/mnt/extDisk/docker",
+    "storage-driver": "overlay2"
+}

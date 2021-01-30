@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  smokeping:
+    image: dperson/smokeping:latest
+    restart: always
+    container_name: 'smokeping'
+    volumes:
+      - /etc/smokeping:/etc/smokeping:ro
+      - /usr/share/smokeping:/usr/share/smokeping:ro
+    command: /usr/bin/smokeping.sh
+    ports:
+     - '8000:80'
