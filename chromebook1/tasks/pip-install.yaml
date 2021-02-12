@@ -6,3 +6,5 @@
       - docker-compose
       - GitPython
       - bs4
+      - Pillow
+      - selenium
