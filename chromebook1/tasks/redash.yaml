@@ -1,0 +1,23 @@
+- name: mkdir redash dir
+  file:
+    path: /mnt/extDisk/root/workspace/redash
+    state: directory
+    mode: 0644
+
+- name: git clone getredash/redash
+  git:
+    repo: 'https://github.com/getredash/redash.git'
+    dest: /mnt/extDisk/root/workspace/redash/redash
+    clone: 'yes'
+
+- name: git clone getredash/setup
+  git:
+    repo: 'https://github.com/getredash/setup.git'
+    dest: /mnt/extDisk/root/workspace/redash/setup
+    clone: 'yes'
+
+- name: replace REDASH_BASE_PATH
+  replace:
+    path: /root/workspace/redash/setup/setup.sh
+    regexp: 'REDASH_BASE_PATH=/opt/redash'
+    replace: 'REDASH_BASE_PATH=/root/workspace/redash'
