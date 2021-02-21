@@ -1,0 +1,14 @@
+- name: copy files
+  ansible.builtin.copy:
+    src: ../files/docker/wp
+    dest: /root/workspace/
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: start container
+  docker_compose:
+    project_src: /root/workspace/wp/
+    files:
+      - docker-compose.yml
+    state: present
