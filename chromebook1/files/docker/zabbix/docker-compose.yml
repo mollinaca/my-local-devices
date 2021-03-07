@@ -1,0 +1,43 @@
+version: '3.1'
+services:
+
+  zabbix_server:
+    image: zabbix/zabbix-server-mysql:alpine-5.2-latest
+    container_name: zabbix_server
+    environment:
+      - DB_SERVER_HOST=${DB_HOST}
+      - MYSQL_PORT=${DB_PORT}
+      - DB_SERVER_PORT=${DB_PORT}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - ZBX_DEBUGLEVEL=${LOG_LEVEL}
+    ports:
+      - "10051:10051"
+    networks:
+      - zabbix_network
+
+  zabbix_web:
+    image: zabbix/zabbix-web-nginx-mysql:alpine-5.2-latest
+    container_name: zabbix_web
+    environment:
+      - ZBX_SERVER_HOST=localhost
+      - DB_SERVER_HOST=${DB_HOST}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - PHP_TZ=${TIME_ZONE}
+    ports:
+      - 18080:8080
+      - 18443:8443
+      - 10080:80
+    links:
+      - zabbix_server
+    networks:
+      - zabbix_network
+
+networks:
+    zabbix_network:
+        external: true

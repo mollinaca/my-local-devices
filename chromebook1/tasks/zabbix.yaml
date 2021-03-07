@@ -1,0 +1,11 @@
+- name: copy conf
+  ansible.builtin.copy:
+    src: ../files/docker/zabbix/
+    dest: /mnt/extDisk/root/workspace/zabbix/
+
+- name: start container
+  docker_compose:
+    project_src: /root/workspace/zabbix/
+    files:
+      - docker-compose.yml
+    state: present
