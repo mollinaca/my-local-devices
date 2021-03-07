@@ -52,10 +52,10 @@
         owner: 'sho'
         group: 'sho'
 
-    - name: create user raspberry
+    - name: create user hstn
       user:
-        name: 'raspberry'
-        groups: 'raspberry'
+        name: 'hstn'
+        groups: 'hstn'
         password: "{{ user_raspberry_pass }}"
         uid: 1001
         shell: /bin/bash
