@@ -1,0 +1,49 @@
+- name: create mysql8 directory
+  file:
+    state: directory
+    path: /mnt/extDisk/root/workspace/mysql8
+
+- name: create mysql directory
+  file:
+    state: directory
+    path: /mnt/extDisk/root/workspace/mysql8/mysql
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: create etc directory
+  file:
+    state: directory
+    path: /mnt/extDisk/root/workspace/mysql8/etc
+
+- name: create log directory
+  file:
+    state: directory
+    path: /mnt/extDisk/root/workspace/mysql8/log
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: copy conf
+  ansible.builtin.copy:
+    src: ../files/etc/mysql8/conf.d/
+    dest: /mnt/extDisk/root/workspace/mysql8/etc/mysql/conf.d/
+
+- name: copy docker-compose.yml
+  copy:
+    src: ../files/docker/mysql8/docker-compose.yml
+    dest: /mnt/extDisk/root/workspace/mysql8/docker-compose.yml
+    backup: 'no'
+
+- name: copy .env
+  copy:
+    src: ../files/docker/mysql8/.env
+    dest: /mnt/extDisk/root/workspace/mysql8/.env
+    backup: 'no'
+
+- name: start container
+  docker_compose:
+    project_src: /root/workspace/mysql8
+    files:
+      - docker-compose.yml
+    state: present

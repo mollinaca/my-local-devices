@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:8
+    container_name: mysql8
+    restart: always
+    env_file: .env
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./log:/var/log/mysql
+      - ./etc/mysql/conf.d:/etc/mysql/conf.d
+    ports:
+      - 13306:3306

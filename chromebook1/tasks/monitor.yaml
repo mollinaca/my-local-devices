@@ -1,0 +1,24 @@
+- name: git clone monitor
+  git:
+    repo: 'github.com:mollinaca/monitor'
+    dest: /home/sho/workspace/monitor
+    clone: 'yes'
+
+- name: chown prom conf dir
+  file:
+    path: /mnt/extDisk/root/workspace/monitor/prom/conf
+    state: directory
+    mode: 0777
+
+- name: chown prom data dir
+  file:
+    path: /mnt/extDisk/root/workspace/monitor/prom/prometheus-data
+    state: directory
+    mode: 0777
+
+- name: start container
+  docker_compose:
+    project_src: /root/workspace/monitor/
+    files:
+      - docker-compose.yml
+    state: present
