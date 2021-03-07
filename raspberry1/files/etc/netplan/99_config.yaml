@@ -1,11 +1,14 @@
 network:
   version: 2
-  renderer: networkd
-  ethernets:
-    enxd037452d1218:
-      dhcp4: false
-      dhcp6: false
+  renderer: NetworkManager
+  wifis:
+    wlan0:
       addresses: [192.168.100.202/24]
       gateway4: 192.168.100.1
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
+      access-points:
+        hstn50:
+          password: "******"
+        hstn24:
+          password: "******"
