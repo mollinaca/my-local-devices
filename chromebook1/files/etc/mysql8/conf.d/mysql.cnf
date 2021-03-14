@@ -4,16 +4,19 @@ collation-server = utf8mb4_bin
 default-time-zone = SYSTEM
 log_timestamps = SYSTEM
 default-authentication-plugin = mysql_native_password
+general_log = 0
+#general_log_file = /var/log/mysql/mysql-query.log
 log-error = /var/log/mysql/mysql-error.log
 slow_query_log = 1
 slow_query_log_file = /var/log/mysql/mysql-slow.log
-long_query_time = 5.0
+long_query_time = 3
 log_queries_not_using_indexes = 0
-general_log = 1
-general_log_file = /var/log/mysql/mysql-query.log
 thread_cache_size=32
+innodb_file_per_table=ON
 innodb_buffer_pool_size=256M
 innodb_log_file_size=64M
+innodb_flush_method=O_DSYNC
+innodb_flush_log_at_trx_commit=2
 
 [mysql]
 default-character-set = utf8mb4

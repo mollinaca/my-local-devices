@@ -5,6 +5,8 @@ services:
     container_name: mysql8
     restart: always
     env_file: .env
+    environment:
+      TZ: Asia/Tokyo
     volumes:
       - ./mysql:/var/lib/mysql
       - ./log:/var/log/mysql
