@@ -1,7 +1,13 @@
-- name: copy conf
+- name: copy docker-compose files
   ansible.builtin.copy:
     src: ../files/docker/zabbix/
     dest: /mnt/extDisk/root/workspace/zabbix/
+
+- name: copy conf files
+  ansible.builtin.copy:
+    src: ../files/etc/zabbix/web/
+    dest: /mnt/extDisk/root/workspace/zabbix/web/
+
 
 - name: start container
   docker_compose:
