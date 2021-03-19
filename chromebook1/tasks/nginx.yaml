@@ -1,0 +1,30 @@
+- name: create nginx directory
+  file:
+    state: directory
+    path: /mnt/extDisk/root/workspace/nginx
+
+- name: copy docker-compose.yml
+  copy:
+    src: ../files/docker/nginx/docker-compose.yml
+    dest: /mnt/extDisk/root/workspace/nginx/docker-compose.yml
+    backup: 'no'
+
+- name: create nginx log directory
+  file:
+    state: directory
+    path: /mnt/extDisk/root/workspace/nginx/log
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: copy conf files
+  ansible.builtin.copy:
+    src: ../files/docker/nginx/conf.d/
+    dest: /mnt/extDisk/root/workspace/nginx/conf.d/
+
+- name: start container
+  docker_compose:
+    project_src: /root/workspace/nginx
+    files:
+      - docker-compose.yml
+    state: present

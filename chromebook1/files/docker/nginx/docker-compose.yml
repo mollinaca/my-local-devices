@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  proxy:
+    image: nginx:1.19.8-alpine
+    container_name: proxy
+    restart: always
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d/
+      - ./log/:/var/log/nginx/
+    ports:
+      - 80:80
