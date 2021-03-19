@@ -1,7 +1,7 @@
 - name: git clone monitor
   git:
     repo: 'github.com:mollinaca/monitor'
-    dest: /home/sho/workspace/monitor
+    dest: /root/workspace/monitor
     clone: 'yes'
 
 - name: chown prom conf dir
