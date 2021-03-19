@@ -1,0 +1,20 @@
+- name: git clone flyers
+  become: true
+  become_user: 'sho'
+  git:
+    repo: 'git@github.com:mollinaca/flyers'
+    dest: /home/sho/workspace/flyers
+    key_file: /home/sho/.ssh/bot_SSHKEY
+    clone: 'yes'
+
+- name: add setting.ini from local
+  become: true
+  become_user: 'sho'
+  copy:
+    src: ../files/secrets/flyers/.settings.ini
+    dest: /home/sho/workspace/flyers/.settings.ini
+
+- name: add cron file
+  copy:
+    src: ../files/etc/cron.d/flyers
+    dest: /etc/cron.d/flyers
