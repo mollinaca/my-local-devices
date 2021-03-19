@@ -12,7 +12,7 @@
   become_user: 'sho'
   copy:
     src: ../files/secrets/flyers/.settings.ini
-    dest: /home/sho/workspace/flyers/.settings.ini
+    dest: /home/sho/workspace/flyers/flyers/.settings.ini
 
 - name: add cron file
   copy:
