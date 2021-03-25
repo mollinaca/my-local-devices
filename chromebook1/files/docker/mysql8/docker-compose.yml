@@ -15,7 +15,10 @@ services:
       - 13306:3306
     networks:
       - zabbix_network
+      - redmine_network
 
 networks:
     zabbix_network:
+        external: true
+    redmine_network:
         external: true
