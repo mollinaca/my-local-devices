@@ -8,3 +8,4 @@
       - bs4
       - Pillow
       - selenium
+      - chromedriver-binary==91.0.4472.101.0
