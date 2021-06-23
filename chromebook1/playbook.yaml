@@ -1,7 +1,7 @@
 - hosts: chromebook1
   become: yes
   tasks:
-#    - include_tasks: tasks/ping.yaml
+    - include_tasks: tasks/ping.yaml
 #    - include_tasks: tasks/apt.yaml
 #    - include_tasks: tasks/general.yaml
 #    - include_tasks: tasks/general_conf.yaml
@@ -12,8 +12,14 @@
 #    - include_tasks: tasks/pip-install.yaml
 #    - include_tasks: tasks/docker.yaml
 #    - include_tasks: tasks/apache2.yaml
+#    - include_tasks: tasks/nginx.yaml
 #    - include_tasks: tasks/smokeping.yaml
 #    - include_tasks: tasks/netdata.yaml
 #    - include_tasks: tasks/monitor.yaml
+#    - include_tasks: tasks/redash.yaml
+#    - include_tasks: tasks/wordpress.yaml
+#    - include_tasks: tasks/mysql8.yaml
+#    - include_tasks: tasks/zabbix.yaml
+#    - include_tasks: tasks/redmine.yaml
 #    - include_tasks: tasks/hstn-family-scripts.yaml
-    - include_tasks: tasks/redash.yaml
+#    - include_tasks: tasks/flyers.yaml
