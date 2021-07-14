@@ -1,5 +1,5 @@
 ### garbage_notify
-00 20 * * *  sho    /usr/bin/python3  /home/sho/workspace/hstn-family-scripts/garbage_notify.py >/dev/null 2>&1
+00 07 * * *  sho    /usr/bin/python3  /home/sho/workspace/hstn-family-scripts/garbage_notify.py >/dev/null 2>&1
 00 17 * * *  sho    /usr/bin/python3  /home/sho/workspace/hstn-family-scripts/garbage_notify.py >/dev/null 2>&1
 
 ### furikomi_reminder
