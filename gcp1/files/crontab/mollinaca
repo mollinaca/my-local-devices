@@ -1,0 +1,11 @@
+### furikomi_reminder
+# SCRIPT_DIR=/home/mollinaca/workspace/hstn-family-scripts
+00 13 * * *    cd /home/mollinaca/workspace/hstn-family-scripts; . /home/mollinaca/.local/share/virtualenvs/hstn-family-scripts-RxC_JISQ/bin/activate; python3 ./furikomi_reminder.py >/dev/null 2>&1 >/dev/null 2>&1
+
+### garbage_nofity
+# SCRIPT_DIR=/home/mollinaca/workspace/hstn-family-scripts
+00 07,17 * * * cd /home/mollinaca/workspace/hstn-family-scripts; . /home/mollinaca/.local/share/virtualenvs/hstn-family-scripts-RxC_JISQ/bin/activate; python3 ./garbage_notify.py >/dev/null 2>&1
+
+### flyers2
+# SCRIPT_DIR=/home/mollinaca/workspace/flyers2
+0 10,19 * * *  cd /home/mollinaca/workspace/flyers2; . /home/mollinaca/.local/share/virtualenvs/flyers2-FdjCa27E/bin/activate; python3 -m flyers2 >/dev/null 2>&1
