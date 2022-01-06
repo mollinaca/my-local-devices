@@ -22,4 +22,5 @@
 #    - include_tasks: tasks/zabbix.yaml
 #    - include_tasks: tasks/redmine.yaml
 #    - include_tasks: tasks/hstn-family-scripts.yaml
-    - include_tasks: tasks/flyers.yaml
+#    - include_tasks: tasks/flyers.yaml
+#    - include_tasks: tasks/flyers2.yaml
