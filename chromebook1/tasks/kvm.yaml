@@ -1,0 +1,17 @@
+- name: apt-get install KVM modules
+  apt:
+    name:
+      - cpu-checker
+      - qemu
+      - qemu-kvm
+      - libvirt-daemon
+      - libvirt-clients
+      - bridge-utils 
+      - virt-manager
+
+- name: enable KVM
+  systemd:
+    name: libvirtd.service
+    state: restarted
+    enabled: yes
+  become: yes
