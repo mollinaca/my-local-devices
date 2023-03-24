@@ -8,6 +8,7 @@
       - libvirt-clients
       - bridge-utils 
       - virt-manager
+      - libosinfo-bin
 
 - name: enable KVM
   systemd:
