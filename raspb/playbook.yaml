@@ -1,0 +1,4 @@
+- hosts: raspb
+  become: yes
+  tasks:
+    - include_tasks: tasks/ping.yaml
