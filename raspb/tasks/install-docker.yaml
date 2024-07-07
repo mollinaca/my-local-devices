@@ -1,0 +1,57 @@
+- name: create docker directory
+  file:
+    state: directory
+    path: /mnt/ssd/docker
+
+# ref: https://docs.docker.com/engine/install/ubuntu/
+- name: install curl ca-certificates
+  apt:
+    name: 
+      - ca-certificates
+      - curl
+
+- name: install keyrings
+  shell: 'install -m 0755 -d /etc/apt/keyrings'
+
+- name: import GPG key
+  shell: 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc'
+
+- name: chmod asc
+  shell: 'chmod a+r /etc/apt/keyrings/docker.asc'
+
+- name: add stable repo to apt
+  shell: 'echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+
+- name: apt update
+  apt: 
+    update_cache: 'yes'
+
+- name: apt get install docker-ce
+  apt:
+    name:
+      - docker-ce
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+- name: corpy daemon.json
+  copy:
+    src: ../files/etc/docker/daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: restart docker
+  systemd:
+    name: docker.service
+    daemon_reload: yes
+    enabled: yes
+
+- name: add user sho to docker group
+  user:
+    name: sho
+    groups: docker
+    append: yes
