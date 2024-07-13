@@ -1,2 +1,3 @@
-# my_ansible_playbooks
-my private ansible playbooks
+# my-local-devices
+
+Memos about my local devices.
