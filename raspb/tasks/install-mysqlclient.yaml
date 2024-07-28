@@ -1,0 +1,31 @@
+- name: Install dependencies for MySQL APT repository
+  apt:
+    name:
+      - lsb-release
+      - wget
+    state: present
+
+#- name: Download MySQL APT config
+#  ansible.builtin.get_url:
+#    url: https://dev.mysql.com/get/mysql-apt-config_0.8.32-1_all.deb
+#    dest: /usr/local/src/mysql-apt-config_0.8.32-1_all.deb
+#    headers:
+#      User-Agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+
+- name: Download MySQL APT config using wget
+  shell: |
+    wget -O /usr/local/src/mysql-apt-config_0.8.32-1_all.deb https://dev.mysql.com/get/mysql-apt-config_0.8.32-1_all.deb
+  args:
+    creates: /usr/local/src/mysql-apt-config_0.8.32-1_all.deb
+
+- name: install APT config
+  shell: dpkg -i /usr/local/src/mysql-apt-config_0.8.32-1_all.deb
+
+- name: Update APT package index
+  apt:
+    update_cache: yes
+
+- name: Install MySQL client
+  apt:
+    name: mysql-client
+    state: latest
