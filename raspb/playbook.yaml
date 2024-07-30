@@ -3,3 +3,4 @@
   tasks:
     - include_tasks: tasks/ping.yaml
 #   - include_tasks: tasks/install-docker.yaml
+#   - include_tasks: tasks/install-mysqlclient.yaml
