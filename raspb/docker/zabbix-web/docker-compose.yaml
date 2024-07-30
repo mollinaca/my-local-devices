@@ -9,6 +9,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - ZBX_ALLOWUNSUPPORTEDDBVERSIONS=1
     ports:
       - "10051:10051"
     networks:
@@ -24,7 +25,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - PHP_TZ="Asia/Tokyo"
-      - ZBX_ALLOWUNSUPPORTEDDBVERSIONS=1
     ports:
       - "9080:8080"
     depends_on:
