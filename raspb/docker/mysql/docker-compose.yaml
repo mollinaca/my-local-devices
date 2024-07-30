@@ -2,6 +2,7 @@ services:
   mysql:
     build:
       context: .
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -17,4 +18,4 @@ volumes:
 
 networks:
   mysql_network:
-    driver: bridge
+    external: true
