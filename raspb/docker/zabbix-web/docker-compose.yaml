@@ -24,6 +24,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - PHP_TZ="Asia/Tokyo"
+      - ZBX_ALLOWUNSUPPORTEDDBVERSIONS=1
     ports:
       - "9080:8080"
     depends_on:
