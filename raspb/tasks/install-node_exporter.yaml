@@ -1,0 +1,56 @@
+- name: Ensure necessary packages are installed
+  apt:
+    name:
+      - wget
+      - tar
+    state: present
+    update_cache: yes
+
+- name: Download Node Exporter
+  get_url:
+    url: "https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-arm64.tar.gz"
+    dest: "/usr/local/src/node_exporter.tar.gz"
+
+- name: Extract Node Exporter
+  unarchive:
+    src: "/usr/local/src/node_exporter.tar.gz"
+    dest: "/usr/local/src/"
+    remote_src: yes
+
+- name: Move Node Exporter binary
+  command: mv /usr/local/src/node_exporter-1.8.2.linux-arm64/node_exporter /usr/local/bin/node_exporter
+
+- name: Create Node Exporter user
+  user:
+    name: node_exporter
+    system: yes
+
+- name: Create systemd service file for Node Exporter
+  copy:
+    dest: /etc/systemd/system/node_exporter.service
+    content: |
+      [Unit]
+      Description=Node Exporter
+      After=network.target
+
+      [Service]
+      User=node_exporter
+      ExecStart=/usr/local/bin/node_exporter
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Reload systemd to recognize the new service
+  systemd:
+    daemon_reload: yes
+
+- name: Enable and start Node Exporter service
+  systemd:
+    name: node_exporter
+    enabled: yes
+    state: started
+
+- name: Clean up temporary files
+  file:
+    path: "/usr/local/src/node_exporter-1.8.2"
+    state: absent

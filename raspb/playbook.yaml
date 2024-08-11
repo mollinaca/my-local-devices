@@ -1,6 +1,11 @@
 - hosts: raspb
   become: yes
+  vars_files:
+    - secrets.yml
   tasks:
     - include_tasks: tasks/ping.yaml
 #   - include_tasks: tasks/install-docker.yaml
 #   - include_tasks: tasks/install-mysqlclient.yaml
+#   - include_tasks: tasks/install-snmpd.yaml
+#    - include_tasks: tasks/install-prometheus.yaml
+    - include_tasks: tasks/install-node_exporter.yaml

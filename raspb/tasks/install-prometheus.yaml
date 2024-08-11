@@ -1,0 +1,79 @@
+- name: Install dependencies
+  apt:
+    name:
+      - wget
+      - tar
+    state: present
+    update_cache: yes
+
+- name: Download Prometheus binary
+  get_url:
+    url: https://github.com/prometheus/prometheus/releases/download/v2.54.0/prometheus-2.54.0.linux-arm64.tar.gz
+    dest: /usr/local/src/prometheus-2.54.0.linux-arm64.tar.gz
+
+- name: Extract Prometheus binary
+  unarchive:
+    src: /usr/local/src/prometheus-2.54.0.linux-arm64.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- name: Create Prometheus configuration directory
+  file:
+    path: /etc/prometheus
+    state: directory
+    mode: '0755'
+
+- name: Copy Prometheus configuration file
+  ansible.builtin.command:
+    cmd: cp /opt/prometheus-2.54.0.linux-arm64/prometheus.yml /etc/prometheus/prometheus.yml
+
+- name: Install Prometheus binaries
+  copy:
+    src: /opt/prometheus-2.54.0.linux-arm64/
+    dest: /usr/local/bin/
+    remote_src: yes
+    mode: '0755'
+
+- name: Create Prometheus user and group
+  user:
+    name: prometheus
+    system: yes
+
+- name: Create Prometheus data directory
+  file:
+    path: /var/lib/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+
+- name: Create Prometheus service file
+  copy:
+    content: |
+      [Unit]
+      Description=Prometheus
+      Documentation=https://prometheus.io/
+      After=network.target
+
+      [Service]
+      User=prometheus
+      Group=prometheus
+      ExecStart=/usr/local/bin/prometheus \
+        --config.file /etc/prometheus/prometheus.yml \
+        --storage.tsdb.path /var/lib/prometheus/ \
+        --web.console.templates=/usr/share/prometheus/consoles \
+        --web.console.libraries=/usr/share/prometheus/console_libraries
+
+      [Install]
+      WantedBy=multi-user.target
+    dest: /etc/systemd/system/prometheus.service
+    mode: '0644'
+
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: yes
+
+- name: Start and enable Prometheus service
+  systemd:
+    name: prometheus
+    state: started
+    enabled: yes

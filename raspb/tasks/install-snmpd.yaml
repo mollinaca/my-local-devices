@@ -1,0 +1,32 @@
+- name: Update APT package index
+  apt:
+    update_cache: yes
+
+- name: Install SNMP and SNMPD packages
+  apt:
+    name:
+      - snmp
+      - snmpd
+    state: present
+
+- name: Create SNMPD configuration file
+  template:
+    src: ../files/etc/snmpd/snmpd.conf.j2
+    dest: /etc/snmp/snmpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+#  notify:
+#    - Restart SNMPD
+
+- name: Ensure SNMPD is enabled and running
+  service:
+    name: snmpd
+    state: started
+    enabled: yes
+
+#handlers:
+#  - name: Restart SNMPD
+#    service:
+#      name: snmpd
+#      state: restarted

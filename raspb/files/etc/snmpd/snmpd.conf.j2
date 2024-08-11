@@ -1,0 +1,6 @@
+# Basic SNMP configuration
+sysContact "mail@mollinaca.dev"
+
+# SNMPv3 User Configuration
+createUser authPrivUser SHA "{{ auth_password }}" AES "{{ priv_password }}"
+rouser authPrivUser

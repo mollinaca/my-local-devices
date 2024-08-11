@@ -1,0 +1,9 @@
+- name: apt update
+  apt: 
+    update_cache: 'yes'
+
+- name: apt get install dev-tools
+  apt:
+    name:
+      - gcc
+      - make
