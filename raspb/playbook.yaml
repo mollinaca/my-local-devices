@@ -9,3 +9,4 @@
 #   - include_tasks: tasks/install-snmpd.yaml
     - include_tasks: tasks/install-prometheus.yaml
 #    - include_tasks: tasks/install-node_exporter.yaml
+    - include_tasks: tasks/install-blackbox_exporter.yaml

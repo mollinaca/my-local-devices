@@ -1,0 +1,17 @@
+modules:
+  icmp:
+    prober: icmp
+    timeout: 5s
+    icmp:
+      preferred_ip_protocol: "ip4"
+      source_ip_address: "127.0.0.1"
+  http_2xx:
+    prober: http
+    timeout: 5s
+    http:
+      method: GET
+      # valid_http_versions: [ "1.0", "1.1", "2" ]
+      # valid_http_methods: [ "GET" ]
+      # valid_http_codes: [2xx]
+      tls_config:
+        insecure_skip_verify: true

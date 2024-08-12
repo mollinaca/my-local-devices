@@ -1,0 +1,64 @@
+#https://github.com/prometheus/blackbox_exporter/releases/download/v0.25.0/blackbox_exporter-0.25.0.linux-arm64.tar.gz
+
+- name: Ensure necessary packages are installed
+  apt:
+    name:
+      - wget
+      - tar
+    state: present
+    update_cache: yes
+
+- name: Download BlackBox Exporter
+  get_url:
+    url: "https://github.com/prometheus/blackbox_exporter/releases/download/v0.25.0/blackbox_exporter-0.25.0.linux-arm64.tar.gz"
+    dest: "/usr/local/src/blackbox_exporter.tar.gz"
+
+- name: Extract BlackBox Exporter
+  unarchive:
+    src: "/usr/local/src/blackbox_exporter.tar.gz"
+    dest: "/usr/local/src/"
+    remote_src: yes
+
+- name: Move BlackBox Exporter binary
+  command: mv /usr/local/src/blackbox_exporter-0.25.0.linux-arm64/blackbox_exporter /usr/local/bin/blackbox_exporter
+
+- name: Create Blackbox Exporter user
+  user:
+    name: blackbox_exporter
+    system: yes
+
+- name: copy Prometheus configuration file from remote
+  copy:
+    src: etc/prometheus/blackbox_exporter.yml
+    dest: /etc/prometheus/blackbox_exporter.yml
+    mode: '0644' 
+
+- name: Create systemd service file for Node Exporter
+  copy:
+    dest: /etc/systemd/system/blackbox_exporter.service
+    content: |
+      [Unit]
+      Description=BlackBox Exporter
+      After=network.target
+
+      [Service]
+      User=blackbox_exporter
+      ExecStart=/usr/local/bin/blackbox_exporter --config.file=/etc/prometheus/blackbox_exporter.yml
+
+      [Install]
+      WantedBy=multi-user.target
+
+- name: Reload systemd to recognize the new service
+  systemd:
+    daemon_reload: yes
+
+- name: Enable and start BlackBox Exporter service
+  systemd:
+    name: blackbox_exporter
+    enabled: yes
+    state: started
+
+- name: Clean up temporary files
+  file:
+    path: "/usr/local/src/blackbox_exporter.tar.gz"
+    state: absent
