@@ -23,9 +23,11 @@
     state: directory
     mode: '0755'
 
-- name: Copy Prometheus configuration file
-  ansible.builtin.command:
-    cmd: cp /opt/prometheus-2.54.0.linux-arm64/prometheus.yml /etc/prometheus/prometheus.yml
+- name: copy Prometheus configuration file from remote
+  copy:
+    src: etc/prometheus/prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+    mode: '0644' 
 
 - name: Install Prometheus binaries
   copy:

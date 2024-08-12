@@ -7,5 +7,5 @@
 #   - include_tasks: tasks/install-docker.yaml
 #   - include_tasks: tasks/install-mysqlclient.yaml
 #   - include_tasks: tasks/install-snmpd.yaml
-#    - include_tasks: tasks/install-prometheus.yaml
-    - include_tasks: tasks/install-node_exporter.yaml
+    - include_tasks: tasks/install-prometheus.yaml
+#    - include_tasks: tasks/install-node_exporter.yaml
